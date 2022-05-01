@@ -5,8 +5,9 @@ class PrototypesController < ApplicationController
 
   def index
     @prototypes = Prototype.all.includes(:user)
-    if !current_user==nil
-    @user = current_user.id
+    if user_signed_in?
+    # if !current_user==nil
+    @user = current_user
     end
   end
 
@@ -48,8 +49,7 @@ class PrototypesController < ApplicationController
     @user =User.find(@prototype.user_id)
     @comment = Comment.new
     @comments = @prototype.comments.includes(:user)
-
-    @prototypes = Prototype.all.includes(:user)
+    # @prototypes = Prototype.all.includes(:user)   
   end
 
   
