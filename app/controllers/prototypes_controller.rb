@@ -61,7 +61,8 @@ class PrototypesController < ApplicationController
   end     #ここで、formでは送信されないデータをmargeメソッドで取得している。
 
   def move_to_index
-    unless user_signed_in? && current_user.id==params[:id]
+    user = Prototype.find(params[:id])
+    unless user_signed_in? && current_user.id==user.user_id
       redirect_to action: :index
     end
   end
