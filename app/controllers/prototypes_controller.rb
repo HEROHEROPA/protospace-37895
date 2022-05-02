@@ -1,6 +1,7 @@
 class PrototypesController < ApplicationController
-  before_action :move_to_index, only:[:edit],except:[:index]
   before_action :authenticate_user!, except:[:index,:show]
+  before_action :move_to_index, only:[:edit],except:[:index]
+  
   
 
   def index
@@ -60,7 +61,7 @@ class PrototypesController < ApplicationController
   end     #ここで、formでは送信されないデータをmargeメソッドで取得している。
 
   def move_to_index
-    unless user_signed_in?
+    unless user_signed_in? && current_user.id==params[:id]
       redirect_to action: :index
     end
   end
